@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>打卡系統</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-loading">
+			<div id="wrapper">
+				<h2 style=" text-align:center; font-size:2em; color:white;">網路簽到系統</h2>
+					<section id="main" style="min-height: 80vh">
+							<img src="images/frog.jpg" width="122px" alt="" />
+
+							<form class="form-signin" action="login.php" method="post">
+						      <h2 class="form-signin-heading">偉文補習班</h2>
+						      <hr />
+						      <label for="inputEmail" class="sr-only">Email</label>
+						      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus><br>
+						      <label for="inputPassword" class="sr-only">Password</label>
+						      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+						      <br>
+						      <button style="width:85px;font-size: 14px;" class="btn" type="submit">登入</button>
+						    </form>
+						    <hr />
+						    <!-- <a style="width:85px;" class="btn" href="register.php">註冊帳號</a> -->
+					</section>
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; GaryHsu</li><li>Design </li>
+						</ul>
+					</footer>
+			</div>
+			<script>
+				if ('addEventListener' in window) {
+					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+				}
+			</script>
+
+	</body>
+</html>
