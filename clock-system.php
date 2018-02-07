@@ -8,6 +8,8 @@
 		<link rel="stylesheet" href="css/bootstrap.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		
+
 	</head>
 	<body class="is-loading" onload="show_date();show_time()">
 			<div id="wrapper" >
@@ -112,7 +114,7 @@
 			      	<div  style="color:#f783ac;">
 			      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
 
-			      		<input type="file" accept="image/*" capture="camera">
+			      		<input type="file" accept="image/*" capture="camera" >
 			      	</div>
 			      	<br>
 			      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
@@ -132,8 +134,8 @@
 			      <div class="modal-body" >
 			      	<div  style="color:#f783ac;">
 			      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
+						<input type = "file" accept= "image/*" capture= "camera" id= "img" />
 
-			      		<input type="file" accept="image/*" capture="camera">
 			      	</div>
 			      	<br>
 			      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
