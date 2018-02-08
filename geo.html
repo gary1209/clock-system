@@ -2,12 +2,7 @@
 <meta charset=utf-8>
 <head>
   <title>HTML5 Test</title>
-  <script>
-    function $i(id) {return document.getElementById(id);}
-    function $n(id) {return document.getElementsByName(name);}
-    function $c(id) {return document.getElementsByClass(className);}
-    function $t(id) {return document.getElementsByClass(tagName);}
-  </script>
+  
 </head>
 <body>
   <table style='border:solid 1px blue;'>
@@ -48,10 +43,10 @@
         }
     else {alert("此瀏覽器不支援地理定位功能!");}
     function successCallback(position) {
-      $i("latitude").innerHTML=position.coords.latitude;
-      $i("longitude").innerHTML=position.coords.longitude;
-      $i("accuracy").innerHTML=position.coords.accuracy;
-      $i("timestamp").innerHTML=position.timestamp;
+      document.getElementById("latitude").innerHTML = position.coords.latitude;
+      document.getElementById("longitude").innerHTML=position.coords.longitude;
+      document.getElementById("accuracy").innerHTML=position.coords.accuracy;
+      document.getElementById("timestamp").innerHTML=position.timestamp;
       }
     function errorCallback(error) {
       var errorTypes={

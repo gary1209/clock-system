@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -25,13 +26,54 @@
 				    <hr />
 				    <div style="text-align: left;">
 				    <?php 
-				    echo ("星瑋你好:")
+				    echo "你好&nbsp;".$_SESSION['name'];
 				    ?>
 
 				    </div>
 				    <br>
 				    <div style="min-height: 25vh">
-					    <table class="table table-bordered" >
+				    	<table class="table table-bordered">
+						  <thead>
+						    <tr>
+						      <th scope="col">狀態</th>
+						      <th scope="col">時間</th>
+						      <th scope="col">備註</th>
+						    </tr>
+						  </thead>
+						  <!-- <tbody>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>Mark</td>
+						      <td>Otto</td>
+						      <td>@mdo</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">2</th>
+						      <td>Jacob</td>
+						      <td>Thornton</td>
+						      <td>@fat</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">3</th>
+						      <td colspan="2">Larry the Bird</td>
+						      <td>@twitter</td>
+						    </tr>
+						  </tbody> -->
+						</table>
+				    	<?php
+				    		include 'db_config.php';
+				    		$sql = "SELECT * FROM record WHERE time > '2018-2-7'";
+				    		$result = mysqli_query($my_db,$sql);
+				    		$row = @mysqli_fetch_array($result);
+				    		echo "<tr>";
+				    		echo "<td>".$row[2]."</td>";
+				    		echo "<td>".$row[3]."</td>";
+				    		echo "<td>".$row[4]."</td>";
+				    		echo "</tr>";
+				    	?>
+
+
+					    <!-- <table class="table table-bordered" >
 						  
 						  <tbody>
 						    <tr class="table-primary">
@@ -59,7 +101,7 @@
 						      <td></td>
 						    </tr>
 						  </tbody>
-						</table>
+						</table> -->
 					</div>
 				    
 				    
@@ -90,6 +132,30 @@
 					echo "IP位置&nbsp;$connecting_ip";
 					?>
 				    </div>
+				    <table style='border:solid 1px blue;'>
+					    <thead>
+					      <tr><th>屬性</th><th>值</th>
+					    </thead>
+					    <tbody>
+					      <tr>
+					        <td>經度</td>
+					        <td id="latitude"></td>
+					      </tr>
+					      <tr>
+					        <td>緯度</td>
+					        <td id="longitude"></td>
+					      </tr>
+					      <tr>
+					        <td>精確度</td>
+					        <td id="accuracy"></td>
+					      </tr>
+					      <tr>
+					        <td>時間戳記</td>
+					        <td id="timestamp"></td>
+					      </tr>
+					    </tbody>
+					</table>
+  
 				    <!-- <a style="width:85px;" class="btn" href="register.php">註冊帳號</a> -->
 				</section>
 
@@ -101,32 +167,36 @@
 			</div>
 
 			<!-- Modal_in -->
-			<div class="modal fade" id="Modal_in" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
-			      <!-- <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLongTitle">打卡上班</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div> -->
-			      <div class="modal-body" >
-			      	<div  style="color:#f783ac;">
-			      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
+			<form name="UploadPage" method="post" enctype="multipart/form-data" action="upload_in.php">
+				<div class="modal fade" id="Modal_in" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <!-- <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">打卡上班</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div> -->
+				      <div class="modal-body" >
+				      	<div  style="color:#f783ac;">
+				      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
 
-			      		<input type="file" accept="image/*" capture="camera" >
-			      	</div>
-			      	<br>
-			      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
-			      	<input type="text">
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
-			        <button type="button" class="btn btn-primary">打卡上班</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+				      		<input type="file" name="photo_in" accept="image/*" capture="camera" >
+				      	</div>
+				      	<br>
+				      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
+				      	<input type="text">
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
+				        <button type="submit" class="btn btn-primary">打卡上班</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+		    </form>
+
+
 			<!-- Modal_check -->
 			<div class="modal fade" id="Modal_check" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -197,6 +267,37 @@
 				　var Today=new Date();
 				　document.write(Today.getFullYear()+ "/" + (Today.getMonth()+1) + "/" + Today.getDate());
 				</script> -->
+	<script>
+    if (navigator.geolocation) {
+        var geo=navigator.geolocation;
+        var option={
+              enableAcuracy:false,
+              maximumAge:0,
+              timeout:600000
+              };
+        geo.getCurrentPosition(successCallback,
+                               errorCallback,
+                               option
+                               );
+        }
+    else {alert("此瀏覽器不支援地理定位功能!");}
+    function successCallback(position) {
+      document.getElementById("latitude").innerHTML = position.coords.latitude;
+      document.getElementById("longitude").innerHTML=position.coords.longitude;
+      document.getElementById("accuracy").innerHTML=position.coords.accuracy;
+      document.getElementById("timestamp").innerHTML=position.timestamp;
+      }
+    function errorCallback(error) {
+      var errorTypes={
+            0:"不明原因錯誤",
+            1:"使用者拒絕提供位置資訊",
+            2:"無法取得位置資訊",
+            3:"位置查詢逾時"
+            };
+      alert(errorTypes[error.code]);
+      alert("code=" + error.code + " " + error.message); //開發測試時用
+      }
+    </script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
