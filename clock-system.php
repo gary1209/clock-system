@@ -25,8 +25,9 @@
 				    </form>
 				    <hr />
 				    <div style="text-align: left;">
-
-				    
+				    <?php 
+				    echo "你好&nbsp;".$_SESSION['name'];
+				    ?>
 
 				    </div>
 				    <br>
@@ -59,7 +60,7 @@
 						    </tr>
 						  </tbody> -->
 						</table>
-				    	<!-- <?php
+				    	<?php
 				    		include 'db_config.php';
 				    		$sql = "SELECT * FROM record WHERE time > '2018-2-7'";
 				    		$result = mysqli_query($my_db,$sql);
@@ -69,7 +70,7 @@
 				    		echo "<td>".$row[3]."</td>";
 				    		echo "<td>".$row[4]."</td>";
 				    		echo "</tr>";
-				    	?> -->
+				    	?>
 
 
 					    <!-- <table class="table table-bordered" >
