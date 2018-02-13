@@ -13,7 +13,7 @@ else{  // 合法登入
 	// mysqli_select_db($my_link,"hw3");
 	include("db_config.php");
 	//搜尋資料庫資料
-	$sql = "SELECT name,email,password,status FROM user where email = '$email'";
+	$sql = "SELECT name,eng_name,email,password,status FROM user where email = '$email'";
 	$result = mysqli_query($my_db,$sql);
 	$row = @mysqli_fetch_array($result);
 	
@@ -23,6 +23,7 @@ else{  // 合法登入
 	if($row['email'] == $email && $row['password'] == $password &&$row['status']==1){
 	        //將帳號寫入session，方便驗證使用者身份
 	        $_SESSION['name'] = $row['name'];
+	        $_SESSION['eng_name'] = $row['eng_name'];
 	        
 	        header('Location: clock-system.php');
 	}

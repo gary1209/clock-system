@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+header('Content-Type: text/html; charset=utf8'); ?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -40,62 +41,69 @@
 						      <th scope="col">備註</th>
 						    </tr>
 						  </thead>
-						  <!-- <tbody>
-						    <tr>
-						      <th scope="row">1</th>
+						  <tbody>
+						    <!-- <tr>
 						      <td>Mark</td>
 						      <td>Otto</td>
 						      <td>@mdo</td>
 						    </tr>
 						    <tr>
-						      <th scope="row">2</th>
 						      <td>Jacob</td>
 						      <td>Thornton</td>
 						      <td>@fat</td>
 						    </tr>
 						    <tr>
-						      <th scope="row">3</th>
-						      <td colspan="2">Larry the Bird</td>
+						      <td>Larry</td>
+						      <td>Thornton</td>
 						      <td>@twitter</td>
-						    </tr>
-						  </tbody> -->
-						</table>
+						    </tr> -->
+						  
 				    	<?php
+				    		$name = $_SESSION['name'];
+				    		$start_date = 
 				    		include 'db_config.php';
-				    		$sql = "SELECT * FROM record WHERE time > '2018-2-7'";
+				    		$sql = "SELECT * FROM record WHERE time > '2018-2-7' AND name = '$name'";
 				    		$result = mysqli_query($my_db,$sql);
 				    		$row = @mysqli_fetch_array($result);
 				    		echo "<tr>";
 				    		echo "<td>".$row[2]."</td>";
-				    		echo "<td>".$row[3]."</td>";
+				    		$time = substr($row['3'], strpos($row['3']," ") +1);
+				    		echo "<td>".$time."</td>";
 				    		echo "<td>".$row[4]."</td>";
 				    		echo "</tr>";
+				    		echo "<br>";
+				    		$row = @mysqli_fetch_array($result);
+				    		echo "<tr>";
+				    		echo "<td>".$row[2]."</td>";
+				    		$time = substr($row['3'], strpos($row['3']," ") +1);
+				    		echo "<td>".$time."</td>";
+				    		echo "<td>".$row[4]."</td>";
+				    		echo "</tr>";
+
 				    	?>
+				    	</tbody>
+						</table>
 
 
-					    <!-- <table class="table table-bordered" >
+					   <!--  <table class="table table-bordered" >
 						  
 						  <tbody>
 						    <tr class="table-primary">
-						      <th scope="row">1</th>
 						      <td>上班</td>
 						      <td>10:28</td>
 						      <td>@北大</td>
 						    </tr>
 						    <tr  class="table-secondary">
-						      <th scope="row">2</th>
 						      <td>中途</td>
 						      <td>14:12</td>
 						      <td>@海大</td>
 						    </tr>
 						    <tr class="table-secondary">
-						      <th scope="row">3</th>
 						      <td>中途</td>
 						      <td>15:12</td>
 						      <td>@清大</td>
 						    </tr>
 						    <tr class="table-danger">
-						      <th scope="row">3</th>
 						      <td>下班</td>
 						      <td>19:12</td>
 						      <td></td>
@@ -128,11 +136,12 @@
 					// $time = date('h:i:sa');
 					// echo "$date&nbsp;&nbsp;\n";
 					// echo "<h2>"."$time&nbsp;&nbsp;\n"."</h2>";
-					$connecting_ip = get_ipaddress();
-					echo "IP位置&nbsp;$connecting_ip";
+					$ip = get_ipaddress();
+					$_SESSION['ip'] = $ip;
+					echo "IP位置&nbsp;$ip";
 					?>
 				    </div>
-				    <table style='border:solid 1px blue;'>
+				    <!-- <table style='border:solid 1px blue;'>
 					    <thead>
 					      <tr><th>屬性</th><th>值</th>
 					    </thead>
@@ -154,9 +163,8 @@
 					        <td id="timestamp"></td>
 					      </tr>
 					    </tbody>
-					</table>
-  
-				    <!-- <a style="width:85px;" class="btn" href="register.php">註冊帳號</a> -->
+					</table> -->
+
 				</section>
 
 				<footer id="footer">
@@ -171,12 +179,6 @@
 				<div class="modal fade" id="Modal_in" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				  <div class="modal-dialog modal-dialog-centered" role="document">
 				    <div class="modal-content">
-				      <!-- <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLongTitle">打卡上班</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div> -->
 				      <div class="modal-body" >
 				      	<div  style="color:#f783ac;">
 				      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
@@ -185,7 +187,10 @@
 				      	</div>
 				      	<br>
 				      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
-				      	<input type="text">
+				      	<input type="text" name="notes_in">
+				      	<input type="hidden" name="latitude_in" id="latitude_in">
+				      	<input type="hidden" name="longitude_in" id="longitude_in">
+				      	<input type="hidden" name="accuracy_in" id="accuracy_in">
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
@@ -209,7 +214,10 @@
 			      	</div>
 			      	<br>
 			      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
-			      	<input type="text">
+			      	<input type="text" name="notes_check">
+			      	<input type="hidden" name="latitude_check" id="latitude_check">
+			      	<input type="hidden" name="longitude_check" id="longitude_check">
+			      	<input type="hidden" name="accuracy_check" id="accuracy_check">
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
@@ -282,10 +290,16 @@
         }
     else {alert("此瀏覽器不支援地理定位功能!");}
     function successCallback(position) {
-      document.getElementById("latitude").innerHTML = position.coords.latitude;
-      document.getElementById("longitude").innerHTML=position.coords.longitude;
-      document.getElementById("accuracy").innerHTML=position.coords.accuracy;
-      document.getElementById("timestamp").innerHTML=position.timestamp;
+      // document.getElementById("latitude").innerHTML = position.coords.latitude;
+      // document.getElementById("longitude").innerHTML=position.coords.longitude;
+      // document.getElementById("accuracy").innerHTML=position.coords.accuracy;
+      // document.getElementById("timestamp").innerHTML=position.timestamp;
+      document.getElementById("latitude_in").value = position.coords.latitude;
+      document.getElementById("longitude_in").value = position.coords.longitude;
+      document.getElementById("accuracy_in").value = position.coords.accuracy;
+      document.getElementById("latitude_check").value = position.coords.latitude;
+      document.getElementById("longitude_check").value = position.coords.longitude;
+      document.getElementById("accuracy_check").value = position.coords.accuracy;
       }
     function errorCallback(error) {
       var errorTypes={

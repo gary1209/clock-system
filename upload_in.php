@@ -1,21 +1,102 @@
 <?php
+header('Content-Type: text/html; charset=utf8');
 session_start();
+date_default_timezone_set("Asia/Taipei");
+$ip = $_SESSION['ip'];
+$name = $_SESSION['name'];
+$eng_name = $_SESSION['eng_name'];
+$notes = $_REQUEST['notes_in'];
+$latitude = $_REQUEST['latitude_in'];
+$longitude = $_REQUEST['longitude_in'];
+$accuracy = $_REQUEST['accuracy_in'];
+$geolocation = "(".$latitude.",".$longitude.")";
+
+include 'db_config.php';
+
+
+$filepath = 'upload_photo/'.$eng_name.'/';
+if (!is_dir($filepath)){
+	if(!mkdir($filepath,755,true)){
+		die("上傳資料夾不存在，並且創建失敗");
+	}
+}
 
 if($_FILES['photo_in']['error']>0){
 	echo "錯誤代碼".$_FILES['photo_in']['error']."<br>";
 }
 else{
-	echo "檔案名稱".$_FILES['photo_in']['name']."<br>";
-	echo "檔案類型".$_FILES['photo_in']['type']."<br>";
-	echo "檔案大小".$_FILES['photo_in']['size']."<br>";
-	echo "暫存名稱".$_FILES['photo_in']['tmp_name'];
+	// echo "檔案名稱".$_FILES['photo_in']['name']."<br>";
+	// echo "檔案類型".$_FILES['photo_in']['type']."<br>";
+	// echo "檔案大小".($_FILES['photo_in']["size"]/1024)."Kb<br>";
+	// echo "暫存名稱".$_FILES['photo_in']['tmp_name']."<br>";
+	// echo $ip."<br>";
+	// echo $name."<br>";
+	// echo $eng_name."<br>";
+	// echo $notes."<br>";
+	// echo "(".$latitude.",".$longitude.")<br>";
+	// echo $accuracy."<br>";
+	$str = date("Y-m-d;H_i_s");
+	$full_path = $filepath.$str.".jpg";
+	echo $full_path;
+	$do_work = file_exists($full_path);
+	if($do_work)
+	{
+		echo "檔案已存在，勿重複上傳!";
+	}
+    else{
+    	$result=move_uploaded_file($_FILES['photo_in']['tmp_name'],$filepath.date("Y-m-d;H_i_s").".jpg");
+    	if($result){
+    		$sql = "insert into record (name,state,notes,ip,photo_path,geolocation,accuracy) values ('$name','上班','$notes','$ip','$full_path','$geolocation','$accuracy')";
+			mysqli_query($my_db,$sql);
+			echo "<script>alert('打卡成功'); location.href ='clock-system.php'; </script>";
+		}
 
-	move_uploaded_file($_FILES['photo_in']['tmp_name'],"upload_photo/"."7777");
+		else {
+			echo "<script>alert('打卡失敗，請重試!'); location.href ='clock-system.php';</script>";
+		}
+    }
+
 }
 
+//; location.href ='clock-system.php'
+
+
+    //版本1
+//    move_uploaded_file($_FILES['photo_in']['tmp_name'],$filepath.date("Y_m_d_H_i_s").".jpg");
+
+    //版本2
+	// $result=move_uploaded_file($_FILES['photo_in']['tmp_name'],$filepath.date("Y_m_d_H_i_s").".jpg");
+	// if($result){
+	// 	echo "<script>alert('打卡成功'); location.href ='clock-system.php';</script>";
+	// }
+
+	// else 
+	// {
+	// 	echo "<script>alert('打卡失敗，請重試!'); location.href ='clock-system.php';</script>";
+	// }
+
+	//版本3
+// 	if (file_exists($filepath.date("Y_m_d_H_i_s").".jpg")){
+// 　　echo "檔案已經存在，請勿重覆上傳相同檔案";
+// 　  }
+    
+//     else{
+//     	$result=move_uploaded_file($_FILES['photo_in']['tmp_name'],$filepath.date("Y_m_d_H_i_s").".jpg");
+//     	if($result){
+// 			echo "<script>alert('打卡成功'); location.href ='clock-system.php';</script>";
+// 		}
+
+// 		else {
+// 			echo "<script>alert('打卡失敗，請重試!'); location.href ='clock-system.php';</script>";
+// 		}
+// 　  }
 
 
 
+ 
+
+
+// move_uploaded_file($_FILES['photo_in']['tmp_name'],"upload_photo/".$name.date("Y-m-d;H:i:s").$_FILES['photo_in']['name']);
 
 // $upload_dir = 'upload_photo/';
 // $file_name = $_FILES['Filedata']['name'];
@@ -26,10 +107,9 @@ else{
 // 	$upload_file = $upload_dir . basename($file_name);
 // }
 // $temploadfile = $_FILES['Filedata']['tmp_name'];
-// $result=move_uploaded_file($temploadfile , $upload_file);
+// $result=move_uploaded_file($_FILES['photo_in']['tmp_name'],$filepath.date("Y_m_d_H_i_s").".jpg");
 
-// if ($result)
-// {
+// if($result){
 	
 // 	echo "<script>alert('打卡成功'); location.href ='clock-system.php';</script>";
 // }

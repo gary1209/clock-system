@@ -19,4 +19,6 @@ if(!@mysqli_select_db($my_db,"clock-system")){
         die("無法使用資料庫");}
 
 mysqli_query($my_db,"SET NAMES 'utf8'");
+mysql_query("SET CHARACTER_SET_CLIENT='utf8'");
+mysql_query("SET CHARACTER_SET_RESULTS='utf8'");
 ?> 
