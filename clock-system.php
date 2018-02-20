@@ -29,12 +29,11 @@ header('Content-Type: text/html; charset=utf8'); ?>
 				    <?php 
 				    echo "你好&nbsp;".$_SESSION['name'];
 				    ?>
-
 				    </div>
 				    <br>
 				    <div style="min-height: 25vh">
-				    	<table class="table table-bordered">
-						  <thead>
+					    <table class="table table-bordered" >
+					      <thead>
 						    <tr>
 						      <th scope="col">狀態</th>
 						      <th scope="col">時間</th>
@@ -42,76 +41,69 @@ header('Content-Type: text/html; charset=utf8'); ?>
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <!-- <tr>
-						      <td>Mark</td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						    </tr>
-						    <tr>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>@fat</td>
-						    </tr>
-						    <tr>
-						      <td>Larry</td>
-						      <td>Thornton</td>
-						      <td>@twitter</td>
-						    </tr> -->
-						  
-				    	<?php
+						  	<?php
 				    		$name = $_SESSION['name'];
-				    		$start_date = 
+				    		date_default_timezone_set("Asia/Taipei");
+				    		$a = date('Y-m-d');//今天的開始時間
+				    		$b = date('Y-m-d',strtotime("+1 day"));//今天的結束時間
 				    		include 'db_config.php';
-				    		$sql = "SELECT * FROM record WHERE time > '2018-2-7' AND name = '$name'";
+				    		$sql = "SELECT * FROM record WHERE time > '$a' AND time < '$b' AND name = '$name' AND state='上班'";
 				    		$result = mysqli_query($my_db,$sql);
-				    		$row = @mysqli_fetch_array($result);
-				    		echo "<tr>";
-				    		echo "<td>".$row[2]."</td>";
-				    		$time = substr($row['3'], strpos($row['3']," ") +1);
-				    		echo "<td>".$time."</td>";
-				    		echo "<td>".$row[4]."</td>";
-				    		echo "</tr>";
-				    		echo "<br>";
-				    		$row = @mysqli_fetch_array($result);
-				    		echo "<tr>";
-				    		echo "<td>".$row[2]."</td>";
-				    		$time = substr($row['3'], strpos($row['3']," ") +1);
-				    		echo "<td>".$time."</td>";
-				    		echo "<td>".$row[4]."</td>";
-				    		echo "</tr>";
+				    		if (mysqli_num_rows($result) > 0){
+				    			while ($row = mysqli_fetch_array($result)) {
+				    				echo "<tr class='table-primary'>";
+						    		echo "<td>".$row[2]."</td>";
+						    		$time = substr($row['3'], 11,8);
+						    		echo "<td>".$time."</td>";
+						    		echo "<td>".$row[4]."</td>";
+						    		echo "</tr>";
 
-				    	?>
-				    	</tbody>
-						</table>
+				    			}
+				    		}
+				    	    ?>
+				    	    <?php
+				    		$name = $_SESSION['name'];
+				    		date_default_timezone_set("Asia/Taipei");
+				    		$a = date('Y-m-d');//今天的開始時間
+				    		$b = date('Y-m-d',strtotime("+1 day"));//今天的結束時間
+				    		include 'db_config.php';
+				    		$sql = "SELECT * FROM record WHERE time > '$a' AND time < '$b' AND name = '$name' AND state='中途'";
+				    		$result = mysqli_query($my_db,$sql);
+				    		if (mysqli_num_rows($result) > 0){
+				    			while ($row = mysqli_fetch_array($result)) {
+				    				echo "<tr class='table-secondary'>";
+						    		echo "<td>".$row[2]."</td>";
+						    		$time = substr($row['3'], 11,8);
+						    		echo "<td>".$time."</td>";
+						    		echo "<td>".$row[4]."</td>";
+						    		echo "</tr>";
 
+				    			}
+				    		}
+				    	    ?>
+				    	    <?php
+				    		$name = $_SESSION['name'];
+				    		date_default_timezone_set("Asia/Taipei");
+				    		$a = date('Y-m-d');//今天的開始時間
+				    		$b = date('Y-m-d',strtotime("+1 day"));//今天的結束時間
+				    		include 'db_config.php';
+				    		$sql = "SELECT * FROM record WHERE time > '$a' AND time < '$b' AND name = '$name' AND state='下班'";
+				    		$result = mysqli_query($my_db,$sql);
+				    		if (mysqli_num_rows($result) > 0){
+				    			while ($row = mysqli_fetch_array($result)) {
+				    				echo "<tr class='table-danger'>";
+						    		echo "<td>".$row[2]."</td>";
+						    		$time = substr($row['3'], 11,8);
+						    		echo "<td>".$time."</td>";
+						    		echo "<td>".$row[4]."</td>";
+						    		echo "</tr>";
 
-					   <!--  <table class="table table-bordered" >
-						  
-						  <tbody>
-						    <tr class="table-primary">
-						      <td>上班</td>
-						      <td>10:28</td>
-						      <td>@北大</td>
-						    </tr>
-						    <tr  class="table-secondary">
-						      <td>中途</td>
-						      <td>14:12</td>
-						      <td>@海大</td>
-						    </tr>
-						    <tr class="table-secondary">
-						      <td>中途</td>
-						      <td>15:12</td>
-						      <td>@清大</td>
-						    </tr>
-						    <tr class="table-danger">
-						      <td>下班</td>
-						      <td>19:12</td>
-						      <td></td>
-						    </tr>
+				    			}
+				    		}
+				    	    ?>
 						  </tbody>
-						</table> -->
-					</div>
-				    
+						</table>
+					<div>
 				    
 				    <hr />
 
@@ -124,21 +116,16 @@ header('Content-Type: text/html; charset=utf8'); ?>
 				    		<button type="button" class="btn btn-outline-secondary" style="width:95px;height:95px; border-radius:99em; max-width: 98% ;" data-toggle="modal" data-target="#Modal_check">中途簽到</button>
 				    	</div>
 				    	<div class="col-4" style="padding: 0 0 0 0" >
-				    		<button type="button" class="btn btn-danger " disabled style="width:95px;height:95px; border-radius:99em; max-width: 98% ;">打卡下班</button>
+				    		<button type="button" class="btn btn-outline-danger "  style="width:95px;height:95px; border-radius:99em; max-width: 98% ;" data-toggle="modal" data-target="#Modal_out">打卡下班</button>
 				    	</div>
 				    </div>
 				    <br>
 				    <div style="text-align: left;">
 				    <?php
 					include 'functions.php';
-					//date_default_timezone_set("Asia/Taipei");
-					// $date = date('Y m/d');
-					// $time = date('h:i:sa');
-					// echo "$date&nbsp;&nbsp;\n";
-					// echo "<h2>"."$time&nbsp;&nbsp;\n"."</h2>";
 					$ip = get_ipaddress();
 					$_SESSION['ip'] = $ip;
-					echo "IP位置&nbsp;$ip";
+					//echo "IP位置&nbsp;$ip";
 					?>
 				    </div>
 				    <!-- <table style='border:solid 1px blue;'>
@@ -203,29 +190,58 @@ header('Content-Type: text/html; charset=utf8'); ?>
 
 
 			<!-- Modal_check -->
-			<div class="modal fade" id="Modal_check" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
-			      <div class="modal-body" >
-			      	<div  style="color:#f783ac;">
-			      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
-						<input type = "file" accept= "image/*" capture= "camera" id= "img" />
+			<form name="UploadPage1" method="post" enctype="multipart/form-data" action="upload_check.php">
+				<div class="modal fade" id="Modal_check" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-body" >
+				      	<div  style="color:#f783ac;">
+				      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
+							<input type="file" name="photo_check" accept="image/*" capture="camera" >
 
-			      	</div>
-			      	<br>
-			      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
-			      	<input type="text" name="notes_check">
-			      	<input type="hidden" name="latitude_check" id="latitude_check">
-			      	<input type="hidden" name="longitude_check" id="longitude_check">
-			      	<input type="hidden" name="accuracy_check" id="accuracy_check">
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
-			        <button type="button" class="btn btn-secondary">中途簽到</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+				      	</div>
+				      	<br>
+				      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
+				      	<input type="text" name="notes_check">
+				      	<input type="hidden" name="latitude_check" id="latitude_check">
+				      	<input type="hidden" name="longitude_check" id="longitude_check">
+				      	<input type="hidden" name="accuracy_check" id="accuracy_check">
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
+				        <button type="submit" class="btn btn-secondary">中途簽到</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</form>
+
+			<!-- Modal_out -->
+			<form name="UploadPage2" method="post" enctype="multipart/form-data" action="upload_out.php">
+				<div class="modal fade" id="Modal_out" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-body" >
+				      	<div  style="color:#f783ac;">
+				      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
+							<input type="file" name="photo_out" accept="image/*" capture="camera" >
+
+				      	</div>
+				      	<br>
+				      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
+				      	<input type="text" name="notes_out">
+				      	<input type="hidden" name="latitude_out" id="latitude_out">
+				      	<input type="hidden" name="longitude_out" id="longitude_out">
+				      	<input type="hidden" name="accuracy_out" id="accuracy_out">
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
+				        <button type="submit" class="btn btn-danger">打卡下班</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</form>
 
 
 	<script>
@@ -300,6 +316,9 @@ header('Content-Type: text/html; charset=utf8'); ?>
       document.getElementById("latitude_check").value = position.coords.latitude;
       document.getElementById("longitude_check").value = position.coords.longitude;
       document.getElementById("accuracy_check").value = position.coords.accuracy;
+      document.getElementById("latitude_out").value = position.coords.latitude;
+      document.getElementById("longitude_out").value = position.coords.longitude;
+      document.getElementById("accuracy_out").value = position.coords.accuracy;
       }
     function errorCallback(error) {
       var errorTypes={

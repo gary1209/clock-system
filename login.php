@@ -29,8 +29,9 @@ else{  // 合法登入
 	}
 	else if($row['email'] == $email && $row['password'] == $password &&$row['status']==0){
 			$_SESSION['name'] = $row['name'];
-			echo $_SESSION['name']."<br>管理者頁面興建中";
-			//header('Location: quotation.php');
+			$_SESSION['eng_name'] = $row['eng_name'];
+			//echo $_SESSION['name']."<br>管理者頁面興建中";
+			header('Location: admin.php');
 	}
 	else
 	{
