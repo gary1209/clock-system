@@ -27,6 +27,7 @@
                 <th>IP</th>
                 <th>Coordinate</th>
                 <th>Accuracy</th>
+                <th>File</th>
             </tr>
         </thead>
         <tfoot>
@@ -38,6 +39,7 @@
                 <th>IP</th>
                 <th>Coordinate</th>
                 <th>Accuracy</th>
+                <th>File</th>
             </tr>
         </tfoot>
         <tbody>
@@ -55,6 +57,7 @@
                     echo "<td>".$row['ip']."</td>";
                     echo "<td>".$row['geolocation']."</td>";
                     echo "<td>".$row['accuracy']."</td>";
+                    echo "<td>x</td>";
                     echo "</tr>";
 
                   }
