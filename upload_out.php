@@ -25,7 +25,7 @@ if($_FILES['photo_out']['error']>0){
 	echo "錯誤代碼".$_FILES['photo_out']['error']."<br>";
 }
 else{
-	$str = date("Y-m-d;H_i_s");
+	$str = date("Y-m-d;H_i_s",strtotime("+8 hours"));
 	$full_path = $filepath.$str.".jpg";
 	$do_work = file_exists($full_path);
 	if($do_work)
