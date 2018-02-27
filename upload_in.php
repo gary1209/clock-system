@@ -23,6 +23,48 @@ if (!is_dir($filepath)){
 
 if($_FILES['photo_in']['error']>0){
 	echo "錯誤代碼".$_FILES['photo_in']['error']."<br>";
+	/*
+case 1:
+  // 檔案大小超出了伺服器上傳限制 UPLOAD_ERR_INI_SIZE
+  $this ->setError( "The file is too large (server)." );
+  break ;
+
+case 2:
+  // 要上傳的檔案大小超出瀏覽器限制 UPLOAD_ERR_FORM_SIZE
+  $this ->setError( "The file is too large (form)." );
+  break ;
+
+case 3:
+  //檔案僅部分被上傳 UPLOAD_ERR_PARTIAL
+  $this ->setError( "The file was only partially uploaded." );
+  break ;
+
+case 4:
+  //沒有找到要上傳的檔案 UPLOAD_ERR_NO_FILE
+  $this ->setError( "No file was uploaded." );
+  break ;
+
+case 5:
+  //伺服器臨時檔案遺失  
+  $this ->setError( "The servers temporary folder is missing." );
+  break ;
+
+case 6:
+  //檔案寫入到站存資料夾錯誤 UPLOAD_ERR_NO_TMP_DIR
+  $this ->setError( "Failed to write to the temporary folder." );
+  break ;
+
+case 7:
+  //無法寫入硬碟 UPLOAD_ERR_CANT_WRITE
+  $this ->setError( "Failed to write file to disk." );
+  break ;
+
+
+case 8:
+  //UPLOAD_ERR_EXTENSION
+  $this ->setError( "File upload stopped by extension." );
+  break ;
+  */
 }
 else{
 	// echo "檔案名稱".$_FILES['photo_in']['name']."<br>";
@@ -37,7 +79,6 @@ else{
 	// echo $accuracy."<br>";
 	$str = date("Y-m-d;H_i_s");
 	$full_path = $filepath.$str.".jpg";
-	echo $full_path;
 	$do_work = file_exists($full_path);
 	if($do_work)
 	{

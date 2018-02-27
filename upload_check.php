@@ -37,7 +37,6 @@ else{
 	// echo $accuracy."<br>";
 	$str = date("Y-m-d;H_i_s");
 	$full_path = $filepath.$str.".jpg";
-	echo $full_path;
 	$do_work = file_exists($full_path);
 	if($do_work)
 	{
