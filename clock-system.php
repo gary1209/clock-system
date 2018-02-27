@@ -54,8 +54,10 @@ header('Content-Type: text/html; charset=utf8'); ?>
 						  	<?php
 				    		$name = $_SESSION['name'];
 				    		date_default_timezone_set("Asia/Taipei");
-				    		$a = date('Y-m-d',strtotime("+8 hours"));//今天的開始時間
-				    		$b = date('Y-m-d',strtotime("+32 hours"));//今天的結束時間
+				    		$a = date('Y-m-d H:i:s',strtotime("+8 hours"));//今天的開始時間
+				    		$b = date('Y-m-d H:i:s',strtotime("+32 hours"));//今天的結束時間
+				    		echo $a;
+				    		echo $b;
 				    		include 'db_config.php';
 				    		$sql = "SELECT * FROM record WHERE time > '$a' AND time < '$b' AND name = '$name' AND state='上班'";
 				    		$result = mysqli_query($my_db,$sql);
