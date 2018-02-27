@@ -23,7 +23,7 @@
 // mysql_query("SET CHARACTER_SET_RESULTS='utf8'");
 
 ?> 
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $cleardb_server   = $cleardb_url["host"];
