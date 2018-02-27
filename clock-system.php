@@ -1,5 +1,6 @@
 <?php session_start();
 header('Content-Type: text/html; charset=utf8'); ?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -26,9 +27,18 @@ header('Content-Type: text/html; charset=utf8'); ?>
 				    </form>
 				    <hr />
 				    <div style="text-align: left;">
-				    <?php 
-				    echo "你好&nbsp;".$_SESSION['name'];
-				    ?>
+				    
+				    <?php
+	
+					if($_SESSION['eng_name'] != null)
+					{
+					        echo "你好&nbsp;".$_SESSION['eng_name'];
+					}
+					else
+					{
+					        echo  "<script>alert('您無權限觀看此頁面!'); location.href = 'index.html';</script>";
+					}
+					?>
 				    </div>
 				    <br>
 				    <div style="min-height: 25vh">
@@ -170,7 +180,7 @@ header('Content-Type: text/html; charset=utf8'); ?>
 				      	<div  style="color:#f783ac;">
 				      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
 
-				      		<input type="file" name="photo_in" accept="image/*" capture="camera" >
+				      		<input type="file" name="photo_in" accept="image/*" capture="camera" required>
 				      	</div>
 				      	<br>
 				      	<p style="color:#f783ac;"><i class="far fa-sticky-note fa-lg"></i>&nbsp;備註:</p>
@@ -197,7 +207,7 @@ header('Content-Type: text/html; charset=utf8'); ?>
 				      <div class="modal-body" >
 				      	<div  style="color:#f783ac;">
 				      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
-							<input type="file" name="photo_check" accept="image/*" capture="camera" >
+							<input type="file" name="photo_check" accept="image/*" capture="camera" required >
 
 				      	</div>
 				      	<br>
@@ -224,7 +234,7 @@ header('Content-Type: text/html; charset=utf8'); ?>
 				      <div class="modal-body" >
 				      	<div  style="color:#f783ac;">
 				      		<p><i class="fas fa-camera fa-lg"></i>&nbsp;拍照:</p>
-							<input type="file" name="photo_out" accept="image/*" capture="camera" >
+							<input type="file" name="photo_out" accept="image/*" capture="camera" required>
 
 				      	</div>
 				      	<br>
