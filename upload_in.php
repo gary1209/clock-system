@@ -11,17 +11,12 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 <?php
 $str = date("Y-m-d;H_i_s");
 $eng_name = $_SESSION['eng_name'];
-$filename = $str.$eng_name.".jpg";
+$filename = $eng_name.$str.".jpg";
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['photo_in']) && $_FILES['photo_in']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo_in']['tmp_name'])) {
-    // FIXME: add more validation, e.g. using ext/fileinfo
-    try {
         // FIXME: do not use 'name' for upload (that's the original filename from the user's computer)
         $upload = $s3->upload($bucket, $filename, fopen($_FILES['photo_in']['tmp_name'], 'rb'), 'public-read');
+} 
 ?>
-<p>Upload <a href="<?=htmlspecialchars($upload->get('ObjectURL'))?>">successful</a> :)</p>
-<?php } catch(Exception $e) { ?>
-        <p>Upload error :(</p>
-<?php } } ?>
 
 
 <?php
