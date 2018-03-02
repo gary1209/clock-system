@@ -24,8 +24,9 @@ else{  // 合法登入
 	        //將帳號寫入session，方便驗證使用者身份
 	        $_SESSION['name'] = $row['name'];
 	        $_SESSION['eng_name'] = $row['eng_name'];
-	        
-	        header('Location: clock-system.php');
+	        echo '<meta http-equiv=REFRESH CONTENT=1;url=clock-system.php>';
+	}
+	        //header('Location: clock-system.php');
 	}
 	else if($row['email'] == $email && $row['password'] == $password &&$row['status']==0){
 			$_SESSION['name'] = $row['name'];
