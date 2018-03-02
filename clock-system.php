@@ -100,8 +100,9 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 						    		$taiwan_time = strtotime($row['3']);//將時間的字串形式轉成時間戳記
 						    		$taiwan_time = strtotime("+8 hours",$taiwan_time);//加八小時
 						    		$time = date("Y-m-d H:i:s", $taiwan_time);
+						    		$time = substr($time, 11,8);
 
-						    		$time = substr($row['3'], 11,8);
+						    		//$time = substr($row['3'], 11,8);
 						    		echo "<td>".$time."</td>";
 						    		echo "<td>".$row[4]."</td>";
 						    		echo "</tr>";
@@ -125,8 +126,9 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 						    		$taiwan_time = strtotime($row['3']);//將時間的字串形式轉成時間戳記
 						    		$taiwan_time = strtotime("+8 hours",$taiwan_time);//加八小時
 						    		$time = date("Y-m-d H:i:s", $taiwan_time);
-						    		
-						    		$time = substr($row['3'], 11,8);
+						    		$time = substr($time, 11,8);
+
+						    		//$time = substr($row['3'], 11,8);
 						    		echo "<td>".$time."</td>";
 						    		echo "<td>".$row[4]."</td>";
 						    		echo "</tr>";
