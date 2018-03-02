@@ -1,3 +1,25 @@
+<!-- aws S3 -->
+<?php
+header('Content-Type: text/html; charset=utf8');
+session_start();
+date_default_timezone_set("Asia/Taipei");
+require('vendor/autoload.php');
+// this will simply read AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from env vars
+$s3 = Aws\S3\S3Client::factory();
+$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+?>
+
+<?php
+$str = date("Y-m-d;H_i_s");
+$eng_name = $_SESSION['eng_name'];
+$filename = $eng_name.$str.".jpg";
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['photo_in']) && $_FILES['photo_in']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo_in']['tmp_name'])) {
+        // FIXME: do not use 'name' for upload (that's the original filename from the user's computer)
+        $upload = $s3->upload($bucket, $filename, fopen($_FILES['photo_in']['tmp_name'], 'rb'), 'public-read');
+} 
+?>
+<!-- aws S3 -->
+
 <?php
 header('Content-Type: text/html; charset=utf8');
 session_start();
