@@ -23,11 +23,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
 <?php } } ?>
         
         <form enctype="multipart/form-data" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
-            <input name="userfile" type="file" id="file"><input type="submit" value="Upload">
+            <input name="userfile" type="file" ><input type="submit" value="Upload">
         </form>
     </body>
 </html>
-
+<input id="file" type="file">
 <script type="text/javascript">
 	
 	var eleFile = document.querySelector('#file');
