@@ -27,26 +27,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
         </form>
     </body>
 </html>
-<h2>请选择文件</h2>
-		<input id="imgFile" type="file" accept="image/*" placeholder="请选择文件" />
-		<br />
-		<br />
-		<img id="img" src=""/>
 
-		<script>
-		var imgFile = document.getElementById('imgFile');
-		var img = document.getElementById('img');
-		imgFile.onchange = function() {
-			var file = this.files[0];
-			compressImage(file, function(data) {
-				alert('压缩完毕');
-				console.log(data);
-				img.src=data;
-			}, {
-				maxWidth: 640, //最大宽度（可选参数，数值）
-				maxHeight: 1008, //最大高度（可选参数，数值）
-				quality: 0.8, //质量（可选参数，数值，0~1）
-				scale: 1, //缩放率（可选参数，数值）
-			});
-		}
-	</script>
+<h2>请选择文件</h2>
+<input id="imgFile" type="file" accept="image/*" placeholder="请选择文件" />
+<br />
+<br />
+<img id="img" src=""/>
+
+<script>
+var imgFile = document.getElementById('imgFile');
+var img = document.getElementById('img');
+imgFile.onchange = function() {
+	var file = this.files[0];
+	compressImage(file, function(photo) {
+		alert('压缩完毕');
+		console.log(photo);
+		img.src=photo;
+		
+	}, {
+		maxWidth: 640, //最大宽度（可选参数，数值）
+		maxHeight: 1008, //最大高度（可选参数，数值）
+		quality: 0.8, //质量（可选参数，数值，0~1）
+		scale: 1, //缩放率（可选参数，数值）
+	});
+}
+</script>
