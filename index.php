@@ -1,5 +1,5 @@
 <?php //include("index.html") ?>
-
+<script src="js/Photo-Compression.0.0.1.min.js"></script>
 <?php
 require('vendor/autoload.php');
 // this will simply read AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from env vars
@@ -27,74 +27,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
         </form>
     </body>
 </html>
-<input id="file" type="file">
-<script type="text/javascript">
-	
-	var eleFile = document.querySelector('#file');
+<h2>请选择文件</h2>
+		<input id="imgFile" type="file" accept="image/*" placeholder="请选择文件" />
+		<br />
+		<br />
+		<img id="img" src=""/>
 
-// 压缩图片需要的一些元素和对象
-var reader = new FileReader(), img = new Image();
-
-// 选择的文件对象
-var file = null;
-
-// 缩放图片需要的canvas
-var canvas = document.createElement('canvas');
-var context = canvas.getContext('2d');
-
-// base64地址图片加载完毕后
-img.onload = function () {
-    // 图片原始尺寸
-    var originWidth = this.width;
-    var originHeight = this.height;
-    // 最大尺寸限制
-    var maxWidth = 400, maxHeight = 400;
-    // 目标尺寸
-    var targetWidth = originWidth, targetHeight = originHeight;
-    // 图片尺寸超过400x400的限制
-    if (originWidth > maxWidth || originHeight > maxHeight) {
-        if (originWidth / originHeight > maxWidth / maxHeight) {
-            // 更宽，按照宽度限定尺寸
-            targetWidth = maxWidth;
-            targetHeight = Math.round(maxWidth * (originHeight / originWidth));
-        } else {
-            targetHeight = maxHeight;
-            targetWidth = Math.round(maxHeight * (originWidth / originHeight));
-        }
-    }
-        
-    // canvas对图片进行缩放
-    canvas.width = targetWidth;
-    canvas.height = targetHeight;
-    // 清除画布
-    context.clearRect(0, 0, targetWidth, targetHeight);
-    // 图片压缩
-    context.drawImage(img, 0, 0, targetWidth, targetHeight);
-    // canvas转为blob并上传
-    canvas.toBlob(function (blob) {
-        // 图片ajax上传
-        var xhr = new XMLHttpRequest();
-        // 文件上传成功
-        xhr.onreadystatechange = function() {
-            if (xhr.status == 200) {
-                // xhr.responseText就是返回的数据
-            }
-        };
-        // 开始上传
-        xhr.open("POST", 'upload_in.php', true);
-        xhr.send(blob);    
-    }, file.type || 'image/png');
-};
-
-// 文件base64化，以便获知图片原始尺寸
-reader.onload = function(e) {
-    img.src = e.target.result;
-};
-eleFile.addEventListener('change', function (event) {
-    file = event.target.files[0];
-    // 选择的文件是图片
-    if (file.type.indexOf("image") == 0) {
-        reader.readAsDataURL(file);    
-    }
-});
-</script>
+		<script>
+		var imgFile = document.getElementById('imgFile');
+		var img = document.getElementById('img');
+		imgFile.onchange = function() {
+			var file = this.files[0];
+			compressImage(file, function(data) {
+				alert('压缩完毕');
+				console.log(data);
+				img.src=data;
+			}, {
+				maxWidth: 640, //最大宽度（可选参数，数值）
+				maxHeight: 1008, //最大高度（可选参数，数值）
+				quality: 0.8, //质量（可选参数，数值，0~1）
+				scale: 1, //缩放率（可选参数，数值）
+			});
+		}
+	</script>
