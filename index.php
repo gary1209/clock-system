@@ -44,21 +44,21 @@ imgFile.onchange = function() {
 		console.log(photo);
 		img.src=photo;
 		
-				$.ajax({
-					type : "POST" ,
-					url : "upload.php" ,
-					data : {a:photo},
-					dataType: "text",
-					success: 
-						alert("123");												
-					},
+				// $.ajax({
+				// 	type : "POST" ,
+				// 	url : "upload.php" ,
+				// 	data : {a:photo},
+				// 	dataType: "text",
+				// 	success: 
+				// 		alert("123");												
+				// 	},
 					
-					error: function(jqXHR) {
+				// 	error: function(jqXHR) {
 						
-                		alert("發生錯誤: " + jqXHR.status);
-            		}	  
+    //             		alert("發生錯誤: " + jqXHR.status);
+    //         		}	  
 					
-				});
+				// });
 	}, {
 		maxWidth: 640, //最大宽度（可选参数，数值）
 		maxHeight: 1008, //最大高度（可选参数，数值）
