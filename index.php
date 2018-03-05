@@ -40,10 +40,25 @@ var img = document.getElementById('img');
 imgFile.onchange = function() {
 	var file = this.files[0];
 	compressImage(file, function(photo) {
-		alert('压缩完毕');
+		alert('壓縮成功');
 		console.log(photo);
 		img.src=photo;
 		
+				$.ajax({
+					type : "POST" ,
+					url : "upload.php" ,
+					data : {a:photo},
+					dataType: "text",
+					success: 
+						alert("123");												
+					},
+					
+					error: function(jqXHR) {
+						
+                		alert("發生錯誤: " + jqXHR.status);
+            		}	  
+					
+				});
 	}, {
 		maxWidth: 640, //最大宽度（可选参数，数值）
 		maxHeight: 1008, //最大高度（可选参数，数值）
