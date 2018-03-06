@@ -60,7 +60,10 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 						  	<?php
 				    		$name = $_SESSION['name'];
 				    		date_default_timezone_set("Asia/Taipei");
-				    		$a = date('Y-m-d',strtotime("-8 hours"));//今天的開始時間
+				    		$a = date('Y-m-d');//今天的開始時間
+				    		$time = strtotime($a);
+				    		$time = strtotime("-8 hours",$time);
+				    		$a = date("Y-m-d H:i:s", $time);
 				    		$b = date('Y-m-d',strtotime("+16 hours"));//今天的結束時間
 				    		echo $a;
 				    		echo $b;

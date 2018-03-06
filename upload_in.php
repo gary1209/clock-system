@@ -43,6 +43,7 @@ if (!is_dir($filepath)){
 }
 
 if($_FILES['photo_in']['error']>0){
+	echo "檔案過大，請使用前置鏡頭";
 	echo "錯誤代碼".$_FILES['photo_in']['error']."<br>";
 	/*
 case 1:
