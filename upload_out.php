@@ -13,9 +13,9 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 $str = date("Y-m-d;H_i_s");
 $eng_name = $_SESSION['eng_name'];
 $filename = $eng_name.$str.".jpg";
-if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['photo_in']) && $_FILES['photo_in']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo_in']['tmp_name'])) {
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['photo_out']) && $_FILES['photo_out']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo_out']['tmp_name'])) {
         // FIXME: do not use 'name' for upload (that's the original filename from the user's computer)
-        $upload = $s3->upload($bucket, $filename, fopen($_FILES['photo_in']['tmp_name'], 'rb'), 'public-read');
+        $upload = $s3->upload($bucket, $filename, fopen($_FILES['photo_out']['tmp_name'], 'rb'), 'public-read');
 } 
 ?>
 <!-- aws S3 -->
