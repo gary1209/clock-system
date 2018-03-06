@@ -68,8 +68,7 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 				    		$time2 = strtotime($b);
 				    		$time2 = strtotime("+16 hours",$time2);
 				    		$b = date("Y-m-d H:i:s", $time2);
-				    		echo $a;
-				    		echo $b;
+				    		
 				    		include 'db_config.php';
 				    		$sql = "SELECT * FROM record WHERE time > '$a' AND time < '$b' AND name = '$name' AND state='上班'";
 				    		$result = mysqli_query($my_db,$sql);
