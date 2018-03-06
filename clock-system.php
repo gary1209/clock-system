@@ -66,7 +66,7 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 				    		$a = date("Y-m-d H:i:s", $time);
 				    		$b = date('Y-m-d');//今天的結束時間
 				    		$time2 = strtotime($b);
-				    		$time2 = strtotime("-8 hours",$time2);
+				    		$time2 = strtotime("+16 hours",$time2);
 				    		$b = date("Y-m-d H:i:s", $time2);
 				    		echo $a;
 				    		echo $b;
