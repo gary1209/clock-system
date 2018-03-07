@@ -10,7 +10,7 @@ $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!'
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<meta content='15; url=index.html' http-equiv='refresh'>
+		<meta content='600; url=index.html' http-equiv='refresh'>
 		<title>打卡系統</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
