@@ -53,13 +53,13 @@
                     echo "<td>".$row['name']."</td>";
                     echo "<td>".$row['state']."</td>";
 
-                    $a = $row['time'];
-                    $time = strtotime($a);
-                    $time = strtotime("+8 hours",$a);
-                    $a = date("Y-m-d H:i:s", $time);
-                    echo "<td>".$a."</td>";
-                    
-                    //echo "<td>".$row['time']."</td>";
+                    // $a = $row['time'];
+                    // $time = strtotime($a);
+                    // $time = strtotime("+8 hours",$a);
+                    // $a = date("Y-m-d H:i:s", $time);
+                    // echo "<td>".$a."</td>";
+
+                    echo "<td>".$row['time']."</td>";
                     echo "<td>".$row['notes']."</td>";
                     echo "<td>".$row['ip']."</td>";
                     echo "<td>".$row['geolocation']."</td>";
