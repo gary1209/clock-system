@@ -53,11 +53,11 @@
                     echo "<td>".$row['name']."</td>";
                     echo "<td>".$row['state']."</td>";
 
-                    $a = "2018-03-06 09:35:07";
-                    $time = strtotime($a);
-                    $time = strtotime("+8 hours",$a);
-                    //$a = date("Y-m-d H:i:s", $time);
-                    echo "<td>".$a."</td>";
+                    $a = $row['time'];
+                    $a = strtotime($a);
+                    $b  = strtotime("+8 hours",$a);
+                    $time = date("Y-m-d H:i:s", $b);
+                    echo "<td>".$time."</td>";
 
                     //echo "<td>".$row['time']."</td>";
                     echo "<td>".$row['notes']."</td>";
