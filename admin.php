@@ -56,7 +56,7 @@
                     $a = "2018-03-06 09:35:07";
                     $time = strtotime($a);
                     $time = strtotime("+8 hours",$a);
-                    $a = date("Y-m-d H:i:s", $time);
+                    //$a = date("Y-m-d H:i:s", $time);
                     echo "<td>".$a."</td>";
 
                     //echo "<td>".$row['time']."</td>";
