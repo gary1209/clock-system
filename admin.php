@@ -62,7 +62,7 @@
                     //echo "<td>".$row['time']."</td>";
                     echo "<td>".$row['notes']."</td>";
                     echo "<td>".$row['ip']."</td>";
-                    echo "<td><a href=https://www.google.com.tw/maps/place/".$row['geolocation']."></a></td>";
+                    echo "<td><a href=https://www.google.com.tw/maps/place/".$row['geolocation'].">地圖</a></td>";
                     echo "<td>".$row['accuracy']."</td>";
                     echo "<td>x</td>";
                     echo "</tr>";
