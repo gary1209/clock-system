@@ -62,11 +62,11 @@
                     //echo "<td>".$row['time']."</td>";
                     echo "<td>".$row['notes']."</td>";
                     echo "<td>".$row['ip']."</td>";
-                    if ($row['geolocation']="+"){
+                    if (strlen($row['geolocation']) < 4){
                       echo "使用者不提供";
                     }
                     else {
-                      echo "<td><a href=https://www.google.com.tw/maps/place/".$row['geolocation'].">地圖</a></td>";
+                      echo "<td><a href=https://www.google.com.tw/maps/place/".$row['geolocation'].">查看地圖</a></td>";
                     }
                     
                     echo "<td>".$row['accuracy']."</td>";
