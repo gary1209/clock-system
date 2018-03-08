@@ -63,7 +63,7 @@
                     echo "<td>".$row['notes']."</td>";
                     echo "<td>".$row['ip']."</td>";
                     if (strlen($row['geolocation']) < 4){
-                      echo "使用者不提供";
+                      echo "<td>使用者不提供</td>";
                     }
                     else {
                       echo "<td><a href=https://www.google.com.tw/maps/place/".$row['geolocation'].">查看地圖</a></td>";
