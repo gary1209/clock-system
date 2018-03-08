@@ -31,7 +31,7 @@ $notes = $_REQUEST['notes_out'];
 $latitude = $_REQUEST['latitude_out'];
 $longitude = $_REQUEST['longitude_out'];
 $accuracy = $_REQUEST['accuracy_out'];
-$geolocation = "(".$latitude.",".$longitude.")";
+$geolocation = $latitude."+".$longitude;
 
 include 'db_config.php';
 
